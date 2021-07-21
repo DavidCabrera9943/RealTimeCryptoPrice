@@ -21,23 +21,41 @@
         <h1>Get Real-Time Price Updates of Crypto Currencies</h1>
         <p>Updated every 15 seconds</p>
     </div>
+
 <div class="container">
-    <div class="list-group">
+    <input type="text"/>
+    <ul class="list-group">
         {% for crypto in supported_cryptos %}
-        <a href="/{{crypto}}" class="list-group-item list-group-item-action">
+        <li><a href="/{{crypto}}" class="list-group-item list-group-item-action">
           {{crypto.upper()}}
-        </a>
+        </a></li>
         {% endfor %}
-      </div>
+      </ul>
 </div>
 <br>
-<div class="text-center">
-    <a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fplotcryptoprice.herokuapp.com&count_bg=%2379C83D&title_bg=%23555555&icon=bitcoin.svg&icon_color=%23E7E7E7&title=visits&edge_flat=false"/></a>
-</div>
+
 <div class="text-center">Made with <span class="entypo-heart"></span> in India by <a href="https://github.com/cyberboysumanjay">Sumanjay</a><br>A part of <a href="https://telegram.dog/sjprojects">Sj Projects</a></div>
+<div class="text-center">BRANCH BY DAVID (DCG) </div>
+
 <!--suppress JSUnresolvedLibraryURL -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-<!--suppress JSUnresolvedLibraryURL -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="{{ url_for('static', filename='jquery-3.5.1.min.js') }}"></script>
+<script type='text/javascript'>
+        $(document).ready(function(){
+            $('input[type="text"]').keyup(function(){
+                var that = this;
+                $allListElement =$('ul > li');
+                var $matchingListElement = $allListElement.filter(function(i,li){
+                    var listItemText = $(li).text().toUpperCase();
+                    searchText = that.value.toUpperCase();
+                    return ~listItemText.indexOf(searchText);
+                });
+                $allListElement.hide();
+                $matchingListElement.show();
+            });
+        });
+</script>
 </body>
 </html>
